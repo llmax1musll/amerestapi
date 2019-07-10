@@ -1,13 +1,19 @@
 package teste.apirest.ame.modelos;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 
 public class Planeta {
 	@Id
 	private ObjectId _id;
+	@NotNull
 	private String nome;
+	@NotNull
 	private String clima;
+	@NotNull
 	private String terreno;
 	
 		
