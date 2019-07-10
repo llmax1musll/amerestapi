@@ -10,12 +10,7 @@ public class AmeApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(AmeApplication.class, args);
-		//System.out.println("oi");
-	}
-	@RequestMapping("/")
-	@ResponseBody
-	String home() {
-		return "index";
-	}
+		
+	}	
 
 }
