@@ -8,7 +8,7 @@ public class AmeApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(AmeApplication.class, args);
-		//s
+		System.out.println("oi");
 	}
 
 }
