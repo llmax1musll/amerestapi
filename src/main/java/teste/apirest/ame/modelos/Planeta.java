@@ -17,6 +17,7 @@ public class Planeta {
 	private String clima;
 	@NotNull
 	private String terreno;
+	private int qtdAparicoesFilmes;
 	
 		
 	
@@ -24,13 +25,13 @@ public class Planeta {
 	public Planeta() {
 		
 	}
-	public Planeta(ObjectId _id, String nome, String clima, String terreno) {
+	public Planeta(ObjectId _id, String nome, String clima, String terreno, int qtdAparicoesFilmes) {
 		this._id = _id;
 		this.nome = nome;
 		this.clima = clima;
 		this.terreno = terreno;
+		this.qtdAparicoesFilmes = qtdAparicoesFilmes;
 	}
-	
 	
 	
 	
@@ -59,6 +60,13 @@ public class Planeta {
 	public void setTerreno(String terreno) {
 		this.terreno = terreno;
 	}
+	public int getQtdAparicoesFilmes() {
+		return qtdAparicoesFilmes;
+	}
+	public void setQtdAparicoesFilmes(int qtdAparicoesFilmes) {
+		this.qtdAparicoesFilmes = qtdAparicoesFilmes;
+	}
+	
 	
 	
 	
