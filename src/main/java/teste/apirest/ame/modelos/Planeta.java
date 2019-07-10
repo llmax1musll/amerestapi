@@ -5,7 +5,9 @@ import javax.validation.constraints.NotNull;
 
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+@Document(collection= "planeta")
 public class Planeta {
 	@Id
 	private ObjectId _id;
