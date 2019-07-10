@@ -30,11 +30,11 @@ public class PlanetasController {
 	
 	
 	@RequestMapping( value="/{id}", method = RequestMethod.GET)
-	public Planeta getPlanetaPorId(@PathVariable("id") ObjectId id) {
+	public Planeta getPlanetaPorId(@PathVariable("id") @Valid ObjectId id) {
 		return repositorio.findBy_id(id);
 	}
 	@RequestMapping( value="/nome/{nome}", method = RequestMethod.GET)
-	public List getPlanetaPorNome(@PathVariable("nome") String nome) {
+	public List getPlanetaPorNome(@PathVariable("nome")@Valid String nome) {
 		return repositorio.findByNomeLike(nome);
 	}
 	
