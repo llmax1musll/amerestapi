@@ -1,9 +1,11 @@
 package teste.apirest.ame.modelos;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import org.bson.types.ObjectId;
+import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -11,11 +13,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Planeta {
 	@Id
 	private ObjectId _id;
-	@NotNull
+	@NotEmpty(message = "Digite um nome para o planeta")
 	private String nome;
-	@NotNull
+	@NotEmpty(message = "Digite o clima do planeta")
 	private String clima;
-	@NotNull
+	@NotEmpty(message = "Digite o terreno do planeta")
 	private String terreno;
 	private int qtdAparicoesFilmes;
 	
