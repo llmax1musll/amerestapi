@@ -52,34 +52,35 @@ public class PlanetasController {
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public void atualizarPlanetaPorId(@PathVariable("id") ObjectId id, @Valid @RequestBody Planeta planeta) {
+	public Planeta atualizarPlanetaPorId(@PathVariable("id") ObjectId id, @Valid @RequestBody Planeta planeta) {
 		planeta.set_id(id);
-		repositorio.save(planeta);
+		//repositorio.save(planeta);
+		
+		try {
+		     
+			planeta.set_id(id);
+	           
+            planeta.setQtdAparicoesFilmes(aparicoesFilmesPlanetas(planeta.getNome()));
+            repositorio.save(planeta);
+            
+        } catch (Exception ex) {
+           ex.printStackTrace();
+
+        }
+		
+		
+		return planeta;
 	}
 	
 	@RequestMapping(value = "/", method = RequestMethod.POST)
 	  public Planeta criarPlaneta(@Valid @RequestBody Planeta planeta) {
-	   planeta.set_id(ObjectId.get());
-	   repositorio.save(planeta);
-	   
-	   
-	   
-	   	
-	     
+	  
 	   	try {
-	   		final String uri = "https://swapi.co/api/planets/?search="+planeta.getNome();
-            RestTemplate restTemplate = new RestTemplate();
-            HttpHeaders headers = new HttpHeaders();
-            headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-            headers.add("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36");
-            HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
-
-            
-            ResponseEntity<RespostaBusca> response = restTemplate.exchange(
-            	    uri, HttpMethod.GET, entity, RespostaBusca.class);
-            
-            planeta.setQtdAparicoesFilmes(response.getBody().getResults().get(0).getFilms().size());
+	     
+	   		planeta.set_id(ObjectId.get());
+            planeta.setQtdAparicoesFilmes(aparicoesFilmesPlanetas(planeta.getNome()));
             repositorio.save(planeta);
+            
         } catch (Exception ex) {
            ex.printStackTrace();
 
@@ -93,5 +94,34 @@ public class PlanetasController {
 	  public void excluirPlaneta(@PathVariable ObjectId id) {
 	   repositorio.delete(repositorio.findBy_id(id));
 	  }
+	
+	
+	//pegar lista de filmes do planeta
+	public int aparicoesFilmesPlanetas(String planeta) {
+		int qtd = 0;
+		try {
+	   		final String uri = "https://swapi.co/api/planets/?search="+planeta;
+            RestTemplate restTemplate = new RestTemplate();
+            HttpHeaders headers = new HttpHeaders();
+            headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+            headers.add("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36");
+            HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
+
+            
+            ResponseEntity<RespostaBusca> response = restTemplate.exchange(
+            	    uri, HttpMethod.GET, entity, RespostaBusca.class);
+            
+            if(!response.getBody().getResults().isEmpty())
+            qtd = response.getBody().getResults().get(0).getFilms().size();
+                
+		} catch (Exception ex) {
+	           ex.printStackTrace();
+
+	        }
+		return qtd;
+                
+            
+	}
+		
 	
 }
