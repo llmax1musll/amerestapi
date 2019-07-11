@@ -74,12 +74,10 @@ public class PlanetasController {
             headers.add("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36");
             HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
 
-            //Object response = restTemplate.exchange(uri, HttpMethod.GET,entity,Object.class);
+            
             ResponseEntity<RespostaBusca> response = restTemplate.exchange(
             	    uri, HttpMethod.GET, entity, RespostaBusca.class);
             
-            
-            System.out.println(response.getBody().getResults().get(0).getFilms().size());
             planeta.setQtdAparicoesFilmes(response.getBody().getResults().get(0).getFilms().size());
             repositorio.save(planeta);
         } catch (Exception ex) {
