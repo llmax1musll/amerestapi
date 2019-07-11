@@ -1,6 +1,7 @@
 package teste.apirest.ame.modelos;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -13,11 +14,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Planeta {
 	@Id
 	private ObjectId _id;
-	@NotEmpty(message = "Digite um nome para o planeta")
+	@NotBlank(message = "Digite um nome para o planeta")
 	private String nome;
-	@NotEmpty(message = "Digite o clima do planeta")
+	@NotBlank(message = "Digite o clima do planeta")
 	private String clima;
-	@NotEmpty(message = "Digite o terreno do planeta")
+	@NotBlank(message = "Digite o terreno do planeta")
 	private String terreno;
 	private int qtdAparicoesFilmes;
 	
